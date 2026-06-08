@@ -4,9 +4,47 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-    <title>MJ Designs | Premium Graphics Design Agency</title>
+    <title>MJ Designs | Premium Graphics Design Agency | Kampala's Trusted Designer</title>
     <meta name="description"
-        content="MJ Designs offers premium branding, web design, print, and packaging graphics. We bring bold ideas to life with elegant, dark, and modern aesthetics." />
+        content="Professional graphic design services in Kampala. Expert in branding, social media graphics, print design, web design. WhatsApp: +256709397670" />
+    <meta name="keywords"
+        content="graphic designer Kampala, logo design, social media graphics, print design, web design, branding, MJ Designs" />
+    <meta name="author" content="Joshua Menhya - MJ Designs" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="MJ Designs | Premium Graphics Design Agency" />
+    <meta property="og:description"
+        content="Professional graphic design services. Branding, social media graphics, print design, web design." />
+    <meta property="og:image" content="https://kibedijoshua.github.io/mj-designs/images/logo.png" />
+    <meta property="og:url" content="https://kibedijoshua.github.io/mj-designs/" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MJ Designs | Premium Graphics Design Agency" />
+    <meta name="twitter:description" content="Professional graphic design services in Kampala" />
+    <meta name="twitter:image" content="https://kibedijoshua.github.io/mj-designs/images/logo.png" />
+
+    <!-- Structured Data / Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "MJ Designs",
+        "image": "https://kibedijoshua.github.io/mj-designs/images/logo.png",
+        "url": "https://kibedijoshua.github.io/mj-designs/",
+        "telephone": "+256709397670",
+        "email": "menhyajoshua@gmail.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Kampala",
+            "addressCountry": "UG"
+        },
+        "priceRange": "$$",
+        "openingHours": "Mo-Su 07:00-20:00"
+    }
+    </script>
 
     <!-- Preload Critical Images - Loads Immediately -->
     <link rel="preload" as="image" href="images/logo.png" fetchpriority="high">
@@ -24,6 +62,28 @@
 
     <!-- Font Awesome 6 (Free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-YOUR_ID');
+    </script>
+
+    <!-- Tawk.to Live Chat -->
+    <script>
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/YOUR_WIDGET_ID/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
 
     <style>
         :root {
@@ -59,6 +119,19 @@
             color: var(--text-white);
             line-height: 1.5;
             overflow-x: hidden;
+        }
+
+        /* Custom cursor */
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold-primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            transform: translate(-50%, -50%);
         }
 
         /* Custom scrollbar */
@@ -282,11 +355,43 @@
             overflow: hidden;
         }
 
+        /* Particle Background */
+        .particle-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(212, 175, 55, 0.15);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+
+            50% {
+                transform: translateY(-30px) translateX(20px);
+            }
+        }
+
         .hero-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-desc {
@@ -394,10 +499,11 @@
             border: 1px solid var(--border-dim);
             transition: var(--transition);
             cursor: pointer;
+            transform-style: preserve-3d;
         }
 
         .service-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-8px) rotateX(5deg);
             border-color: var(--gold-primary);
             box-shadow: var(--shadow-gold);
         }
@@ -418,17 +524,6 @@
 
         .service-card:hover .service-image img {
             transform: scale(1.05);
-        }
-
-        .service-image .placeholder-icon {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: var(--gold-dim);
-            background: linear-gradient(145deg, #1E2A3A, #0F172A);
         }
 
         .service-content {
@@ -455,7 +550,32 @@
             font-weight: 600;
         }
 
-        /* Portfolio Grid */
+        /* Portfolio Grid with Filter */
+        .portfolio-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--border-dim);
+            color: var(--text-gray);
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--gold-primary);
+            color: var(--navy-deep);
+            border-color: var(--gold-primary);
+        }
+
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -497,11 +617,6 @@
             transform: scale(1.05);
         }
 
-        .portfolio-img .placeholder-icon {
-            font-size: 4rem;
-            color: var(--gold-dim);
-        }
-
         .portfolio-info {
             padding: 1.5rem;
         }
@@ -520,6 +635,128 @@
         .click-link:hover {
             gap: 0.8rem;
             color: var(--gold-light);
+        }
+
+        /* Load More Button */
+        .load-more-container {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .load-more-btn {
+            background: transparent;
+            border: 2px solid var(--gold-primary);
+            color: var(--gold-primary);
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .load-more-btn:hover {
+            background: var(--gold-primary);
+            color: var(--navy-deep);
+        }
+
+        /* Pricing Table */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border-dim);
+            transition: var(--transition);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold-primary);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--gold-primary);
+            transform: scale(1.02);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gold-primary);
+            margin: 1rem 0;
+        }
+
+        .price small {
+            font-size: 0.9rem;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid var(--border-dim);
+        }
+
+        .stars {
+            color: var(--gold-primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Client Logos */
+        .client-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .client-logo {
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+
+        .client-logo:hover {
+            opacity: 1;
+        }
+
+        /* Quote Calculator */
+        .quote-calculator {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .quote-calculator select,
+        .quote-calculator input {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            background: var(--navy-mid);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            color: white;
+        }
+
+        .quote-result {
+            margin-top: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--gold-primary);
         }
 
         /* About Section */
@@ -542,6 +779,23 @@
             border-left: 3px solid var(--gold-primary);
             background: rgba(212, 175, 55, 0.05);
             border-radius: 0 20px 20px 0;
+        }
+
+        /* Awards Section */
+        .awards-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .award-badge {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
 
         /* Contact */
@@ -583,6 +837,31 @@
             gap: 1rem;
         }
 
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: var(--gold-primary);
+            color: var(--navy-deep);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 99;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            background: var(--gold-light);
+        }
+
+        /* WhatsApp Float */
         .whatsapp-float {
             position: fixed;
             bottom: 2rem;
@@ -639,6 +918,19 @@
             color: var(--gold-primary);
         }
 
+        /* Loading Skeleton */
+        .skeleton {
+            background: linear-gradient(110deg, var(--navy-mid) 8%, var(--navy-dark) 18%, var(--navy-mid) 33%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to {
+                background-position: -200% 0;
+            }
+        }
+
         @media (max-width: 860px) {
 
             .hero-grid,
@@ -671,11 +963,24 @@
                 width: 35px;
                 height: 35px;
             }
+
+            .back-to-top {
+                bottom: 70px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+            }
         }
     </style>
 </head>
 
 <body>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Particle Background -->
+    <div class="particle-bg" id="particleBg"></div>
 
     <nav class="navbar">
         <div class="container nav-container">
@@ -691,6 +996,7 @@
                 <a href="#home">Home</a>
                 <a href="#services">Services</a>
                 <a href="#work">Portfolio</a>
+                <a href="#pricing">Pricing</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
                 <a href="https://wa.me/256709397670?text=Hello%20MJ%20Designs%2C%20I'm%20interested%20in%20your%20graphics%20design%20services!"
@@ -706,6 +1012,7 @@
             <a href="#home">🏠 Home</a>
             <a href="#services">🎨 Services</a>
             <a href="#work">🖼️ Portfolio</a>
+            <a href="#pricing">💰 Pricing</a>
             <a href="#about">👤 About</a>
             <a href="#contact">📞 Contact</a>
             <a href="https://wa.me/256709397670?text=Hello%20MJ%20Designs%2C%20I'm%20interested%20in%20your%20graphics%20design%20services!"
@@ -751,6 +1058,19 @@
             </div>
         </section>
 
+        <!-- Client Logos Section -->
+        <section class="section">
+            <div class="container">
+                <h2><span class="gold-text">/</span> Trusted By</h2>
+                <div class="client-logos">
+                    <div class="client-logo">🏢 Company 1</div>
+                    <div class="client-logo">🏢 Company 2</div>
+                    <div class="client-logo">🏢 Company 3</div>
+                    <div class="client-logo">🏢 Company 4</div>
+                </div>
+            </div>
+        </section>
+
         <!-- Services Section with Image Cards -->
         <section class="section" id="services">
             <div class="container">
@@ -761,12 +1081,117 @@
             </div>
         </section>
 
-        <!-- Portfolio Section -->
+        <!-- Portfolio Section with Filter -->
         <section class="section" id="work">
             <div class="container">
                 <h2><span class="gold-text">/</span> My Creative Portfolio</h2>
+                <div class="portfolio-filter" id="portfolioFilter">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="print">Print Design</button>
+                    <button class="filter-btn" data-filter="social">Social Media</button>
+                </div>
                 <div class="portfolio-grid" id="portfolioGrid">
                     <!-- Portfolio cards will be inserted here by JavaScript -->
+                </div>
+                <div class="load-more-container">
+                    <button class="load-more-btn" id="loadMoreBtn">Load More Projects →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="section" id="pricing">
+            <div class="container">
+                <h2><span class="gold-text">/</span> Simple Pricing</h2>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>Basic</h3>
+                        <div class="price">150,000 <small>UGX</small></div>
+                        <p>Logo Design</p>
+                        <p>Basic Brand Guide</p>
+                        <p>Social Media Kit</p>
+                        <button class="btn btn-outline" style="margin-top: 1.5rem;"
+                            onclick="window.open('https://wa.me/256709397670?text=I'm interested in the Basic package','_blank')">Inquire
+                            →</button>
+                    </div>
+                    <div class="pricing-card featured">
+                        <h3>Professional</h3>
+                        <div class="price">350,000 <small>UGX</small></div>
+                        <p>Full Brand Identity</p>
+                        <p>Print Materials</p>
+                        <p>Website Design</p>
+                        <p>Social Media Management</p>
+                        <button class="btn btn-primary" style="margin-top: 1.5rem;"
+                            onclick="window.open('https://wa.me/256709397670?text=I'm interested in the Professional package','_blank')">Choose
+                            Plan →</button>
+                    </div>
+                    <div class="pricing-card">
+                        <h3>Enterprise</h3>
+                        <div class="price">Custom</div>
+                        <p>Full Service Package</p>
+                        <p>Unlimited Revisions</p>
+                        <p>Priority Support</p>
+                        <p>Dedicated Designer</p>
+                        <button class="btn btn-outline" style="margin-top: 1.5rem;"
+                            onclick="window.open('https://wa.me/256709397670?text=I'm interested in the Enterprise package','_blank')">Contact
+                            Us →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote Calculator -->
+        <section class="section">
+            <div class="container">
+                <h2><span class="gold-text">/</span> Instant Quote</h2>
+                <div class="quote-calculator">
+                    <select id="serviceType">
+                        <option value="logo">Logo Design - 150,000 UGX</option>
+                        <option value="branding">Full Branding - 350,000 UGX</option>
+                        <option value="social">Social Media Pack - 100,000 UGX</option>
+                        <option value="web">Website Design - 500,000 UGX</option>
+                    </select>
+                    <input type="number" id="quantity" placeholder="Quantity" value="1" min="1">
+                    <div class="quote-result">Total: <span id="totalPrice">150,000</span> UGX</div>
+                    <button class="btn btn-primary" onclick="sendQuote()">Request This Quote →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="section">
+            <div class="container">
+                <h2><span class="gold-text">/</span> Client Love</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"MJ Designs transformed our brand identity. Professional, creative, and delivered on time!"
+                        </p>
+                        <h4>- Sarah K., Business Owner</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"The social media graphics increased our engagement by 200%. Highly recommend!"</p>
+                        <h4>- Mark T., Marketing Director</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"Best designer I've worked with. Understood my vision perfectly."</p>
+                        <h4>- Rachel M., Startup Founder</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Awards Section -->
+        <section class="section">
+            <div class="container">
+                <h2><span class="gold-text">/</span> Recognition</h2>
+                <div class="awards-grid">
+                    <div class="award-badge">🏆 Best Designer 2024</div>
+                    <div class="award-badge">⭐ Top Rated on Upwork</div>
+                    <div class="award-badge">📱 500+ Projects Completed</div>
+                    <div class="award-badge">❤️ 100% Client Satisfaction</div>
                 </div>
             </div>
         </section>
@@ -799,6 +1224,7 @@
                     <div class="contact-info">
                         <p><i class="fab fa-whatsapp gold-text"></i> <strong>WhatsApp:</strong> +256 709 397 670</p>
                         <p><i class="far fa-envelope gold-text"></i> <strong>Email:</strong> menhyajoshua@gmail.com</p>
+                        <p><i class="fas fa-clock gold-text"></i> <strong>Hours:</strong> Mon-Sun, 7:00 AM - 8:00 PM</p>
                     </div>
                 </div>
                 <form id="contactForm">
@@ -823,19 +1249,24 @@
                 <div class="footer-logo-text">MJ<span>DESIGNS</span></div>
             </div>
             <p>© 2025 MJ Designs — Bold Identities, Timeless Design. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">📍 Kampala, Uganda | 📱 +256 709 397 670</p>
         </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <a href="https://wa.me/256709397670?text=Hello%20MJ%20Designs%2C%20I%20want%20to%20discuss%20a%20design%20project!"
         class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
     <script>
-        // Mobile Menu Functionality
+        // ==================== MOBILE MENU ====================
         const menuBtn = document.getElementById('mobileMenuBtn');
         const mobilePanel = document.getElementById('mobilePanel');
         const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
 
-        // Toggle menu when clicking hamburger button
         if (menuBtn && mobilePanel) {
             menuBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -843,7 +1274,6 @@
             });
         }
 
-        // Close mobile menu when clicking any link in the mobile menu
         if (mobileMenuLinks) {
             mobileMenuLinks.forEach(link => {
                 link.addEventListener('click', () => {
@@ -852,7 +1282,6 @@
             });
         }
 
-        // Close mobile menu when clicking outside
         document.addEventListener('click', (e) => {
             if (mobilePanel && mobilePanel.classList.contains('open')) {
                 if (!menuBtn.contains(e.target) && !mobilePanel.contains(e.target)) {
@@ -861,52 +1290,63 @@
             }
         });
 
-        // WhatsApp Channel Link
+        // ==================== BACK TO TOP BUTTON ====================
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ==================== CUSTOM CURSOR ====================
+        const cursor = document.querySelector('.custom-cursor');
+        if (cursor) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+        }
+
+        // ==================== PARTICLE BACKGROUND ====================
+        const particleBg = document.getElementById('particleBg');
+        if (particleBg) {
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.width = Math.random() * 6 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = Math.random() * 20 + 10 + 's';
+                particleBg.appendChild(particle);
+            }
+        }
+
+        // ==================== WHATSAPP CHANNEL ====================
         const WHATSAPP_CHANNEL = 'https://whatsapp.com/channel/0029VbDzTc30lwgnBick5n0S';
 
-        // Services Cards with Images (Lazy Load)
+        // ==================== SERVICES CARDS ====================
         const servicesItems = [
-            {
-                name: "Social Media Graphics",
-                icon: "fab fa-instagram",
-                description: "Scroll-stopping posts, stories, and ads for Instagram, Facebook, LinkedIn, and more.",
-                image: "images/socialmedia.jfif",
-                whatsappMsg: "I'm interested in your Social Media Graphics services"
-            },
-            {
-                name: "Print Design",
-                icon: "fas fa-print",
-                description: "Brochures, banners, flyers, business cards — tangible impact that stands out.",
-                image: "images/print-design.jpg",
-                whatsappMsg: "I'm interested in your Print Design services"
-            },
-            {
-                name: "Invitations & Cards",
-                icon: "fas fa-envelope-open-text",
-                description: "Luxury wedding invites, corporate cards, event stationery with elegant touch.",
-                image: "images/invitations.jpg",
-                whatsappMsg: "I'm interested in your Invitations & Cards services"
-            },
-            {
-                name: "Web Design",
-                icon: "fas fa-laptop-code",
-                description: "Modern, responsive websites that elevate your digital presence and brand identity.",
-                image: "images/web-design.jpg",
-                whatsappMsg: "I'm interested in your Web Design services"
-            }
+            { name: "Social Media Graphics", icon: "fab fa-instagram", description: "Scroll-stopping posts, stories, and ads for Instagram, Facebook, LinkedIn, and more.", image: "images/socialmedia.jfif", whatsappMsg: "I'm interested in your Social Media Graphics services" },
+            { name: "Print Design", icon: "fas fa-print", description: "Brochures, banners, flyers, business cards — tangible impact that stands out.", image: "images/print-design.jpg", whatsappMsg: "I'm interested in your Print Design services" },
+            { name: "Invitations & Cards", icon: "fas fa-envelope-open-text", description: "Luxury wedding invites, corporate cards, event stationery with elegant touch.", image: "images/invitations.jpg", whatsappMsg: "I'm interested in your Invitations & Cards services" },
+            { name: "Web Design", icon: "fas fa-laptop-code", description: "Modern, responsive websites that elevate your digital presence and brand identity.", image: "images/web-design.jpg", whatsappMsg: "I'm interested in your Web Design services" }
         ];
 
-        // Render Services Cards with Images (Lazy Loading)
         const servicesGrid = document.getElementById('servicesGrid');
         if (servicesGrid) {
             servicesItems.forEach(service => {
                 const div = document.createElement('div');
                 div.className = 'service-card';
-
                 div.addEventListener('click', () => {
                     window.open(`https://wa.me/256709397670?text=Hello%20MJ%20Designs!%20${encodeURIComponent(service.whatsappMsg)}.%20Can%20you%20share%20more%20details%20and%20pricing%3F`, '_blank');
                 });
-
                 div.innerHTML = `
                     <div class="service-image">
                         <img src="${service.image}" alt="${service.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -926,52 +1366,38 @@
             });
         }
 
-        // Portfolio Cards (Lazy Load)
-        const portfolioItems = [
-            {
-                name: "Flyers & Posters",
-                cat: "Print Design",
-                icon: "fas fa-file-alt",
-                image: "images/flyers.jpg"
-            },
-            {
-                name: "Business Cards",
-                cat: "Print Design",
-                icon: "fas fa-id-card",
-                image: "images/business-cards.jpg"
-            },
-            {
-                name: "Banners & Social Covers",
-                cat: "Social Media Graphics",
-                icon: "fas fa-image",
-                image: "images/banners.jpg"
-            }
+        // ==================== PORTFOLIO ITEMS ====================
+        const allPortfolioItems = [
+            { name: "Flyers & Posters", cat: "print", icon: "fas fa-file-alt", image: "images/flyers.jpg" },
+            { name: "Business Cards", cat: "print", icon: "fas fa-id-card", image: "images/business-cards.jpg" },
+            { name: "Banners & Social Covers", cat: "social", icon: "fas fa-image", image: "images/banners.jpg" },
+            { name: "Instagram Post Design", cat: "social", icon: "fab fa-instagram", image: "images/socialmedia.jfif" },
+            { name: "Brochure Design", cat: "print", icon: "fas fa-book", image: "images/print-design.jpg" },
+            { name: "Facebook Cover", cat: "social", icon: "fab fa-facebook", image: "images/banners.jpg" }
         ];
 
+        let visibleItems = 3;
         const portfolioGrid = document.getElementById('portfolioGrid');
-        if (portfolioGrid) {
-            portfolioItems.forEach(item => {
+
+        function renderPortfolio() {
+            portfolioGrid.innerHTML = '';
+            const filteredItems = currentFilter === 'all' ? allPortfolioItems : allPortfolioItems.filter(item => item.cat === currentFilter);
+            const itemsToShow = filteredItems.slice(0, visibleItems);
+
+            itemsToShow.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'portfolio-item';
-
-                // When clicking anywhere on the portfolio card, open WhatsApp Channel
-                div.addEventListener('click', () => {
-                    window.open(WHATSAPP_CHANNEL, '_blank');
-                });
-
-                const imageHtml = `
+                div.addEventListener('click', () => { window.open(WHATSAPP_CHANNEL, '_blank'); });
+                div.innerHTML = `
                     <div class="portfolio-img">
                         <img src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="placeholder-icon" style="display: none; position: absolute; inset: 0; align-items: center; justify-content: center;">
                             <i class="${item.icon}" style="font-size: 4rem;"></i>
                         </div>
                     </div>
-                `;
-
-                div.innerHTML = imageHtml + `
                     <div class="portfolio-info">
                         <h3>${item.name}</h3>
-                        <p>${item.cat}</p>
+                        <p>${item.cat === 'print' ? 'Print Design' : 'Social Media Graphics'}</p>
                         <div class="click-link">
                             <i class="fab fa-whatsapp"></i> CLICK HERE to view samples
                             <i class="fas fa-arrow-right"></i>
@@ -980,9 +1406,73 @@
                 `;
                 portfolioGrid.appendChild(div);
             });
+
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (loadMoreBtn) {
+                loadMoreBtn.style.display = filteredItems.length > visibleItems ? 'block' : 'none';
+            }
         }
 
-        // Contact form -> WhatsApp message
+        let currentFilter = 'all';
+
+        // Filter buttons
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                visibleItems = 3;
+                renderPortfolio();
+            });
+        });
+
+        // Load more button
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', () => {
+                visibleItems += 3;
+                renderPortfolio();
+            });
+        }
+
+        renderPortfolio();
+
+        // ==================== QUOTE CALCULATOR ====================
+        const prices = {
+            logo: 150000,
+            branding: 350000,
+            social: 100000,
+            web: 500000
+        };
+
+        const serviceSelect = document.getElementById('serviceType');
+        const quantityInput = document.getElementById('quantity');
+        const totalSpan = document.getElementById('totalPrice');
+
+        function updateTotal() {
+            const service = serviceSelect.value;
+            const quantity = parseInt(quantityInput.value) || 1;
+            const total = prices[service] * quantity;
+            totalSpan.textContent = total.toLocaleString();
+        }
+
+        if (serviceSelect && quantityInput) {
+            serviceSelect.addEventListener('change', updateTotal);
+            quantityInput.addEventListener('input', updateTotal);
+            updateTotal();
+        }
+
+        function sendQuote() {
+            const service = serviceSelect.options[serviceSelect.selectedIndex].text;
+            const quantity = quantityInput.value;
+            const total = totalSpan.textContent;
+            const msg = `Hello MJ Designs! I'm interested in ${service} for ${quantity} item(s). Total: ${total} UGX. Can you provide more details?`;
+            window.open(`https://wa.me/256709397670?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+        window.sendQuote = sendQuote;
+
+        // ==================== CONTACT FORM ====================
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
             contactForm.addEventListener('submit', (e) => {
@@ -994,6 +1484,19 @@
                 window.open(`https://wa.me/256709397670?text=${whatsappMsg}`, '_blank');
             });
         }
+
+        // ==================== SMOOTH SCROLL FOR NAV LINKS ====================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
     </script>
 </body>
 
