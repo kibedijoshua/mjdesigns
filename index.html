@@ -658,16 +658,17 @@
             color: var(--navy-deep);
         }
 
-        /* Quote Calculator */
-        .quote-calculator {
+        /* Quote Calculator - Simple Inquiry Form */
+        .inquiry-form {
             background: var(--card-bg);
             border-radius: 24px;
             padding: 2rem;
             margin-top: 2rem;
         }
 
-        .quote-calculator select,
-        .quote-calculator input {
+        .inquiry-form select,
+        .inquiry-form input,
+        .inquiry-form textarea {
             width: 100%;
             padding: 0.8rem;
             margin: 0.5rem 0;
@@ -675,13 +676,19 @@
             border: 1px solid var(--border-dim);
             border-radius: 12px;
             color: white;
+            font-family: inherit;
         }
 
-        .quote-result {
-            margin-top: 1rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--gold-primary);
+        .inquiry-form textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .inquiry-form label {
+            font-weight: 600;
+            margin-top: 0.5rem;
+            display: block;
+            color: var(--text-gray);
         }
 
         /* About Section */
@@ -704,23 +711,6 @@
             border-left: 3px solid var(--gold-primary);
             background: rgba(212, 175, 55, 0.05);
             border-radius: 0 20px 20px 0;
-        }
-
-        /* Awards Section */
-        .awards-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-
-        .award-badge {
-            background: rgba(212, 175, 55, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(212, 175, 55, 0.3);
         }
 
         /* Client Logos */
@@ -1027,33 +1017,32 @@
             </div>
         </section>
 
-        <!-- Quote Calculator Section -->
+        <!-- Send Your Budget Section - Simple Inquiry Form -->
         <section class="section">
             <div class="container">
-                <h2><span class="gold-text">/</span> Get Instant Quote</h2>
-                <div class="quote-calculator">
-                    <select id="serviceType">
-                        <option value="logo">Logo Design - 150,000 UGX</option>
-                        <option value="branding">Full Branding - 350,000 UGX</option>
-                        <option value="social">Social Media Pack - 100,000 UGX</option>
-                        <option value="web">Website Design - 500,000 UGX</option>
+                <h2><span class="gold-text">/</span> Send Your Budget</h2>
+                <div class="inquiry-form">
+                    <label for="projectType">What service do you need?</label>
+                    <select id="projectType">
+                        <option value="Logo Design">Logo Design</option>
+                        <option value="Full Branding">Full Branding</option>
+                        <option value="Social Media Graphics">Social Media Graphics</option>
+                        <option value="Print Design (Flyers/Brochures)">Print Design (Flyers/Brochures)</option>
+                        <option value="Business Cards">Business Cards</option>
+                        <option value="Website Design">Website Design</option>
+                        <option value="Other">Other</option>
                     </select>
-                    <input type="number" id="quantity" placeholder="Quantity" value="1" min="1">
-                    <div class="quote-result">Total: <span id="totalPrice">150,000</span> UGX</div>
-                    <button class="btn btn-primary" onclick="sendQuote()">Request This Quote →</button>
-                </div>
-            </div>
-        </section>
 
-        <!-- Awards Section -->
-        <section class="section">
-            <div class="container">
-                <h2><span class="gold-text">/</span> Recognition</h2>
-                <div class="awards-grid">
-                    <div class="award-badge">🏆 Best Designer 2024</div>
-                    <div class="award-badge">⭐ Top Rated on Upwork</div>
-                    <div class="award-badge">📱 500+ Projects Completed</div>
-                    <div class="award-badge">❤️ 100% Client Satisfaction</div>
+                    <label for="budget">Your Budget (UGX)</label>
+                    <input type="number" id="budget" placeholder="e.g., 200000">
+
+                    <label for="projectDetails">Project Details / Requirements</label>
+                    <textarea id="projectDetails"
+                        placeholder="Tell me about your project, timeline, and any specific requirements..."></textarea>
+
+                    <button class="btn btn-primary" id="sendBudgetBtn" style="margin-top: 1rem; width: 100%;">
+                        <i class="fab fa-whatsapp"></i> Send Budget & Discuss
+                    </button>
                 </div>
             </div>
         </section>
@@ -1299,39 +1288,23 @@
 
         renderPortfolio();
 
-        // ==================== QUOTE CALCULATOR ====================
-        const prices = {
-            logo: 150000,
-            branding: 350000,
-            social: 100000,
-            web: 500000
-        };
+        // ==================== SEND BUDGET INQUIRY ====================
+        const sendBudgetBtn = document.getElementById('sendBudgetBtn');
+        if (sendBudgetBtn) {
+            sendBudgetBtn.addEventListener('click', () => {
+                const projectType = document.getElementById('projectType').value;
+                const budget = document.getElementById('budget').value;
+                const projectDetails = document.getElementById('projectDetails').value;
 
-        const serviceSelect = document.getElementById('serviceType');
-        const quantityInput = document.getElementById('quantity');
-        const totalSpan = document.getElementById('totalPrice');
+                let message = `Hello MJ Designs! I'm interested in getting a design quote.%0A%0A`;
+                message += `*Project Type:* ${projectType}%0A`;
+                message += `*Budget:* ${budget ? budget.toLocaleString() + ' UGX' : 'Not specified'}%0A`;
+                message += `*Project Details:* ${projectDetails || 'Not specified'}%0A%0A`;
+                message += `Please let me know if this works within my budget. I'm open to discussion.`;
 
-        function updateTotal() {
-            const service = serviceSelect.value;
-            const quantity = parseInt(quantityInput.value) || 1;
-            const total = prices[service] * quantity;
-            totalSpan.textContent = total.toLocaleString();
+                window.open(`https://wa.me/256709397670?text=${message}`, '_blank');
+            });
         }
-
-        if (serviceSelect && quantityInput) {
-            serviceSelect.addEventListener('change', updateTotal);
-            quantityInput.addEventListener('input', updateTotal);
-            updateTotal();
-        }
-
-        function sendQuote() {
-            const service = serviceSelect.options[serviceSelect.selectedIndex].text;
-            const quantity = quantityInput.value;
-            const total = totalSpan.textContent;
-            const msg = `Hello MJ Designs! I'm interested in ${service} for ${quantity} item(s). Total: ${total} UGX. Can you provide more details?`;
-            window.open(`https://wa.me/256709397670?text=${encodeURIComponent(msg)}`, '_blank');
-        }
-        window.sendQuote = sendQuote;
 
         // ==================== CONTACT FORM ====================
         const contactForm = document.getElementById('contactForm');
